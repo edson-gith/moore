@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moore Mozambique — Audit · Tax · Advisory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:       #0E3FA3;
+  --blue-deep:  #0A2E7A;
+  --blue-mid:   #1B52C4;
+  --blue-pale:  #EBF1FD;
+  --blue-faint: #F4F7FE;
+  --white:      #FFFFFF;
+  --off:        #F8F8F7;
+  --ink:        #0A0A0A;
+  --muted:      #6E6E6E;
+  --light:      #B0B0B0;
+  --rule:       #E5E5E3;
+  --ff-serif:   'Playfair Display', Georgia, serif;
+  --ff-sans:    'Inter', system-ui, sans-serif;
+  --ease:       cubic-bezier(.22,.68,0,1.2);
+  --ease-out:   cubic-bezier(.25,.46,.45,.94);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--ff-sans);background:var(--white);color:var(--ink);overflow-x:hidden;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+::selection{background:var(--blue);color:var(--white)}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-thumb{background:var(--blue)}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:22px 52px;transition:padding .4s,background .4s,border-color .4s;border-bottom:1px solid transparent}
+#nav.scrolled{background:rgba(255,255,255,.97);backdrop-filter:blur(20px);padding:14px 52px;border-color:var(--rule)}
+.nav-logo{display:flex;align-items:center;text-decoration:none}
+.nav-logo-box{background:var(--blue);color:#fff;font-family:var(--ff-sans);font-size:13px;font-weight:600;letter-spacing:.5px;padding:8px 16px;line-height:1}
+.nav-logo-tag{font-family:var(--ff-sans);font-size:11px;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);padding-left:14px}
+.nav-menu{display:flex;align-items:center;gap:4px}
+.nav-item{font-size:13px;font-weight:400;color:var(--ink);text-decoration:none;padding:8px 16px;transition:color .25s,background .25s}
+.nav-item:hover{color:var(--blue);background:var(--blue-faint)}
+.nav-btn{margin-left:12px;background:var(--blue);color:#fff;font-size:12px;font-weight:500;letter-spacing:.5px;padding:10px 24px;text-decoration:none;transition:background .25s,transform .2s;border:none;cursor:pointer;font-family:var(--ff-sans)}
+.nav-btn:hover{background:var(--blue-deep);transform:translateY(-1px)}
+
+/* HERO */
+#hero{min-height:100vh;display:grid;grid-template-rows:auto 1fr;padding-top:72px;overflow:hidden}
+.hero-top-bar{border-bottom:1px solid var(--rule);padding:0 52px;display:flex;align-items:center;justify-content:space-between;height:44px;background:var(--blue-faint)}
+.hero-top-bar-left{font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--blue);display:flex;align-items:center;gap:12px}
+.bar-dot{width:5px;height:5px;border-radius:50%;background:var(--blue);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero-top-bar-right{font-size:11px;color:var(--muted);letter-spacing:.5px;display:flex;align-items:center;gap:0}
+.hero-top-bar-right span{padding:0 20px;border-left:1px solid var(--rule)}
+.hero-top-bar-right span:first-child{border-left:none}
+.hero-body{display:grid;grid-template-columns:1fr 520px;align-items:stretch}
+.hero-content{padding:64px 52px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid var(--rule)}
+.hero-kicker{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:32px;display:flex;align-items:center;gap:12px;opacity:0;animation:rise .7s .1s var(--ease-out) forwards}
+.hero-kicker::before{content:'';width:28px;height:1.5px;background:var(--blue)}
+.hero-h1{font-family:var(--ff-serif);font-size:clamp(54px,6.5vw,96px);font-weight:800;line-height:.95;color:var(--ink);letter-spacing:-2px;opacity:0;animation:rise .8s .22s var(--ease-out) forwards}
+.hero-h1 .line-blue{color:var(--blue)}
+.hero-h1 .line-ital{font-style:italic;font-weight:400;color:var(--muted)}
+.hero-divider{width:100%;height:1px;background:var(--rule);margin:44px 0;opacity:0;animation:rise .6s .4s var(--ease-out) forwards}
+.hero-sub-row{display:grid;grid-template-columns:1fr 1fr;gap:40px;opacity:0;animation:rise .8s .5s var(--ease-out) forwards}
+.hero-sub-text{font-size:15px;font-weight:300;color:var(--muted);line-height:1.8}
+.hero-sub-actions{display:flex;flex-direction:column;gap:12px;justify-content:flex-end}
+.btn-solid{background:var(--blue);color:#fff;font-size:13px;font-weight:500;padding:15px 32px;text-decoration:none;display:block;text-align:center;transition:background .25s,transform .2s}
+.btn-solid:hover{background:var(--blue-deep);transform:translateY(-1px)}
+.btn-border{border:1.5px solid var(--rule);color:var(--ink);font-size:13px;font-weight:400;padding:14px 32px;text-decoration:none;display:block;text-align:center;transition:border-color .25s,color .25s}
+.btn-border:hover{border-color:var(--blue);color:var(--blue)}
+.hero-content-bottom{opacity:0;animation:rise .7s .7s var(--ease-out) forwards}
+.hero-numbers{display:flex;gap:0;border-top:1px solid var(--rule);padding-top:36px;margin-top:36px}
+.hero-number{flex:1;padding-right:32px;border-right:1px solid var(--rule);margin-right:32px}
+.hero-number:last-child{border-right:none;margin-right:0}
+.hn-val{font-family:var(--ff-serif);font-size:46px;font-weight:800;color:var(--blue);letter-spacing:-1.5px;line-height:1;display:block}
+.hn-label{font-size:11px;font-weight:400;color:var(--muted);letter-spacing:.5px;margin-top:6px;display:block;line-height:1.4}
+.hero-panel{position:relative;overflow:hidden;background:var(--blue-deep);display:flex;flex-direction:column}
+.hero-panel-img{flex:1;position:relative;overflow:hidden}
+.hero-panel-img img{width:100%;height:100%;object-fit:cover;opacity:.65;display:block;transition:transform 10s ease;transform:scale(1.06);filter:saturate(.9)}
+.hero-panel-img img.loaded{transform:scale(1)}
+.hero-panel-footer{padding:28px 32px;background:var(--blue);flex-shrink:0}
+.hero-pf-tag{font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:6px}
+.hero-pf-text{font-family:var(--ff-serif);font-size:20px;font-weight:700;color:#fff;line-height:1.2;font-style:italic}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* TICKER */
+.ticker{background:var(--blue);overflow:hidden;height:44px;display:flex;align-items:center;border-top:3px solid var(--blue-mid)}
+.ticker-inner{display:flex;width:max-content;animation:tick 35s linear infinite}
+.ticker-inner:hover{animation-play-state:paused}
+.t-item{display:flex;align-items:center;gap:28px;padding:0 36px;white-space:nowrap;font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.75)}
+.t-sep{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.3)}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* STATEMENT */
+#statement{padding:100px 52px;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:200px 1fr;gap:80px;align-items:start}
+.statement-side-label{font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--blue);writing-mode:vertical-rl;transform:rotate(180deg);display:inline-block;padding-top:8px}
+.statement-body{font-family:var(--ff-serif);font-size:clamp(28px,3vw,46px);font-weight:400;line-height:1.3;color:var(--ink);letter-spacing:-.5px}
+.statement-body em{font-style:italic;color:var(--blue)}
+.statement-body strong{font-weight:700}
+.statement-foot{margin-top:48px;padding-top:32px;border-top:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
+.statement-chips{display:flex;gap:10px;flex-wrap:wrap}
+.chip{border:1px solid var(--rule);padding:7px 18px;font-size:12px;font-weight:500;color:var(--ink);letter-spacing:.3px;transition:all .25s;cursor:default}
+.chip:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-faint)}
+.statement-moore-tag{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--muted);letter-spacing:.5px}
+.moore-bar{width:32px;height:2px;background:var(--blue)}
+
+/* SERVICES */
+#services{background:var(--off);padding:100px 0}
+.services-header{padding:0 52px 56px;display:grid;grid-template-columns:1fr auto;align-items:end;border-bottom:1px solid var(--rule)}
+.sec-eyebrow{font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:14px}
+.sec-title{font-family:var(--ff-serif);font-size:clamp(38px,4.5vw,64px);font-weight:800;letter-spacing:-1.5px;line-height:1;color:var(--ink)}
+.sec-title span{color:var(--blue);font-style:italic;font-weight:400}
+.services-link-all{font-size:12px;font-weight:500;letter-spacing:.5px;color:var(--blue);text-decoration:none;display:flex;align-items:center;gap:8px;transition:gap .3s}
+.services-link-all:hover{gap:14px}
+.services-link-all::after{content:'→';font-size:16px}
+.svc-row{display:grid;grid-template-columns:72px 1fr 240px 80px;align-items:center;gap:0;padding:0 52px;border-bottom:1px solid var(--rule);min-height:90px;cursor:default;transition:background .3s;position:relative;overflow:hidden}
+.svc-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;background:var(--blue);transition:width .4s var(--ease-out)}
+.svc-row:hover::before{width:4px}
+.svc-row:hover{background:var(--blue-faint)}
+.svc-n{font-family:var(--ff-serif);font-size:13px;font-weight:700;color:var(--light);letter-spacing:.5px}
+.svc-name{font-family:var(--ff-serif);font-size:clamp(22px,2.2vw,30px);font-weight:700;color:var(--ink);letter-spacing:-.5px;transition:color .3s}
+.svc-row:hover .svc-name{color:var(--blue)}
+.svc-desc{font-size:13px;font-weight:300;color:var(--muted);line-height:1.7;padding:28px 40px 28px 0}
+.svc-arrow{font-size:22px;color:var(--light);text-align:right;transition:color .3s,transform .3s}
+.svc-row:hover .svc-arrow{color:var(--blue);transform:translateX(6px)}
+
+/* ABOUT */
+#about{background:var(--white);display:grid;grid-template-columns:1fr 1fr;min-height:700px}
+.about-img-side{position:relative;overflow:hidden;background:var(--blue-deep)}
+.about-img-side img{width:100%;height:100%;object-fit:cover;opacity:.6;display:block;transition:transform .7s var(--ease-out);filter:saturate(.8)}
+.about-img-side:hover img{transform:scale(1.04)}
+.about-img-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(14,63,163,.5) 0%,transparent 60%)}
+.about-img-caption{position:absolute;bottom:0;left:0;right:0;padding:40px 52px}
+.about-img-num{font-family:var(--ff-serif);font-size:100px;font-weight:800;line-height:1;color:rgba(255,255,255,.08);letter-spacing:-4px}
+.about-img-label{font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.about-text-side{padding:80px 72px;display:flex;flex-direction:column;justify-content:center;border-left:1px solid var(--rule)}
+.about-tag{display:inline-flex;align-items:center;gap:8px;background:var(--blue-pale);border:1px solid rgba(14,63,163,.15);padding:6px 16px;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--blue);width:fit-content;margin-bottom:28px}
+.about-h{font-family:var(--ff-serif);font-size:clamp(32px,3.5vw,50px);font-weight:800;letter-spacing:-1px;line-height:1.1;color:var(--ink);margin-bottom:28px}
+.about-h em{font-style:italic;color:var(--blue);font-weight:400}
+.about-p{font-size:15px;font-weight:300;color:var(--muted);line-height:1.9;margin-bottom:16px;max-width:440px}
+.about-rule{width:40px;height:2px;background:var(--blue);margin:28px 0}
+.about-facts{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:12px}
+.about-fact{background:var(--white);padding:20px 22px}
+.af-val{font-family:var(--ff-serif);font-size:30px;font-weight:800;color:var(--blue);letter-spacing:-1px;line-height:1}
+.af-label{font-size:12px;color:var(--muted);margin-top:4px}
+
+/* NETWORK */
+#network{background:var(--blue-deep);padding:0;display:grid;grid-template-columns:1fr 1fr;min-height:600px;overflow:hidden;position:relative}
+.net-ghost{position:absolute;font-family:var(--ff-serif);font-size:260px;font-weight:800;color:rgba(255,255,255,.025);letter-spacing:-8px;line-height:1;bottom:-40px;right:-20px;pointer-events:none;user-select:none}
+.net-left{padding:80px 72px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2;border-right:1px solid rgba(255,255,255,.08)}
+.net-eyebrow{font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:24px;display:flex;align-items:center;gap:10px}
+.net-eyebrow::before{content:'';display:block;width:20px;height:1px;background:rgba(255,255,255,.3)}
+.net-h{font-family:var(--ff-serif);font-size:clamp(38px,4.5vw,64px);font-weight:800;color:#fff;letter-spacing:-1.5px;line-height:1.0;margin-bottom:28px}
+.net-h span{color:rgba(255,255,255,.4);font-weight:400;font-style:italic}
+.net-p{font-size:15px;font-weight:300;color:rgba(255,255,255,.55);line-height:1.9;max-width:400px;margin-bottom:44px}
+.btn-white{border:1.5px solid rgba(255,255,255,.25);color:#fff;font-size:12px;font-weight:500;letter-spacing:1px;text-transform:uppercase;padding:13px 32px;text-decoration:none;display:inline-block;transition:all .3s;width:fit-content}
+.btn-white:hover{background:#fff;color:var(--blue-deep)}
+.net-right{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1px;background:rgba(255,255,255,.06)}
+.nstat{background:rgba(255,255,255,.03);padding:52px 44px;transition:background .3s;display:flex;flex-direction:column;justify-content:flex-end}
+.nstat:hover{background:rgba(255,255,255,.07)}
+.nstat-n{font-family:var(--ff-serif);font-size:58px;font-weight:800;color:#fff;letter-spacing:-2px;line-height:1;margin-bottom:8px}
+.nstat-n sup{font-size:22px;color:rgba(255,255,255,.5)}
+.nstat-l{font-size:12px;font-weight:400;color:rgba(255,255,255,.4);letter-spacing:.5px;line-height:1.4}
+
+/* INDUSTRIES */
+#industries{padding:100px 52px;background:var(--off);border-top:1px solid var(--rule)}
+.ind-top{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:60px}
+.ind-sub{font-size:15px;font-weight:300;color:var(--muted);line-height:1.85;align-self:end;max-width:380px}
+.ind-pills{display:flex;flex-wrap:wrap;gap:12px}
+.ind-pill{display:inline-flex;align-items:center;gap:10px;border:1.5px solid var(--rule);background:var(--white);padding:14px 24px;font-family:var(--ff-sans);font-size:14px;font-weight:500;color:var(--ink);cursor:default;transition:all .28s var(--ease-out)}
+.ind-pill-icon svg{width:18px;height:18px;stroke:var(--blue);fill:none;stroke-width:1.5}
+.ind-pill:hover{border-color:var(--blue);background:var(--blue);color:#fff;transform:translateY(-2px);box-shadow:0 8px 28px rgba(14,63,163,.2)}
+.ind-pill:hover svg{stroke:#fff}
+
+/* INSIGHTS */
+#insights{padding:100px 52px;background:var(--white);border-top:1px solid var(--rule)}
+.ins-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:52px}
+.ins-grid{display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:auto auto;gap:24px}
+.ins-card{border:1px solid var(--rule);background:var(--white);overflow:hidden;transition:box-shadow .35s,transform .35s var(--ease-out);cursor:default}
+.ins-card:first-child{grid-row:span 2;grid-column:1}
+.ins-card:hover{box-shadow:0 16px 52px rgba(0,0,0,.07);transform:translateY(-3px)}
+.ins-img{width:100%;display:block;height:200px;object-fit:cover;filter:saturate(.85);transition:filter .4s,transform .5s var(--ease-out)}
+.ins-card:first-child .ins-img{height:320px}
+.ins-card:hover .ins-img{filter:saturate(1)}
+.ins-body{padding:26px 28px 30px}
+.ins-cat{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--blue);margin-bottom:10px;display:block}
+.ins-title{font-family:var(--ff-serif);font-size:20px;font-weight:700;color:var(--ink);line-height:1.25;letter-spacing:-.3px;margin-bottom:14px}
+.ins-card:first-child .ins-title{font-size:26px}
+.ins-meta{font-size:12px;color:var(--light);display:flex;align-items:center;gap:8px}
+.ins-meta-dot{width:3px;height:3px;border-radius:50%;background:var(--rule)}
+
+/* WHY */
+#why{background:var(--blue);padding:100px 52px}
+.why-header{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:72px}
+.why-h{font-family:var(--ff-serif);font-size:clamp(38px,4.5vw,64px);font-weight:800;color:#fff;letter-spacing:-1.5px;line-height:1.05}
+.why-h em{font-style:italic;font-weight:400;color:rgba(255,255,255,.5)}
+.why-sub{font-size:15px;font-weight:300;color:rgba(255,255,255,.6);line-height:1.85;max-width:380px;align-self:end}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.1)}
+.why-cell{padding:40px 36px;background:transparent;transition:background .3s;position:relative;overflow:hidden}
+.why-cell::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:#fff;transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease-out)}
+.why-cell:hover::before{transform:scaleX(1)}
+.why-cell:hover{background:rgba(255,255,255,.06)}
+.why-num{font-family:var(--ff-serif);font-size:12px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,.35);margin-bottom:20px;display:block}
+.why-icon{width:40px;height:40px;margin-bottom:20px;border:1px solid rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.why-icon svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:1.5}
+.why-cell-h{font-family:var(--ff-serif);font-size:20px;font-weight:700;color:#fff;letter-spacing:-.3px;line-height:1.2;margin-bottom:12px}
+.why-cell-p{font-size:13px;font-weight:300;color:rgba(255,255,255,.5);line-height:1.8}
+
+/* CONTACT */
+#contact{background:var(--white);display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--rule)}
+.contact-l{background:var(--blue-faint);padding:88px 72px;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--rule)}
+.contact-eyebrow{font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.contact-eyebrow::before{content:'';width:20px;height:1.5px;background:var(--blue)}
+.contact-h{font-family:var(--ff-serif);font-size:clamp(40px,4.5vw,60px);font-weight:800;color:var(--ink);letter-spacing:-1.5px;line-height:1.05;margin-bottom:24px}
+.contact-h em{font-style:italic;color:var(--blue);font-weight:400}
+.contact-sub{font-size:15px;font-weight:300;color:var(--muted);line-height:1.85;max-width:380px;margin-bottom:52px}
+.contact-details{display:flex;flex-direction:column;gap:20px}
+.cd-item{display:flex;align-items:flex-start;gap:14px;font-size:14px;font-weight:300;color:var(--muted);line-height:1.6}
+.cd-icon{width:36px;height:36px;flex-shrink:0;background:var(--blue);border-radius:2px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.cd-icon svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2}
+.contact-r{padding:88px 72px;display:flex;flex-direction:column;justify-content:center}
+.form-h{font-family:var(--ff-serif);font-size:26px;font-weight:700;color:var(--ink);letter-spacing:-.5px;margin-bottom:32px}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.f-field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.f-label{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+.f-input{background:var(--off);border:1.5px solid var(--rule);padding:13px 16px;font-family:var(--ff-sans);font-size:14px;font-weight:300;color:var(--ink);outline:none;transition:border-color .25s,background .25s;width:100%;-webkit-appearance:none}
+.f-input::placeholder{color:#BABABA}
+.f-input:focus{border-color:var(--blue);background:var(--white)}
+.f-row .f-field{margin-bottom:0}
+.f-submit{width:100%;background:var(--blue);border:none;color:#fff;padding:16px;font-family:var(--ff-serif);font-size:16px;font-weight:700;cursor:pointer;transition:background .25s,transform .2s;margin-top:4px;letter-spacing:.3px}
+.f-submit:hover{background:var(--blue-deep);transform:translateY(-1px)}
+
+/* NEWSLETTER */
+#newsletter{background:var(--ink);padding:52px;display:flex;align-items:center;justify-content:space-between;gap:40px}
+.nl-text h3{font-family:var(--ff-serif);font-size:24px;font-weight:700;color:#fff;letter-spacing:-.3px;margin-bottom:4px}
+.nl-text p{font-size:13px;color:rgba(255,255,255,.45)}
+.nl-form{display:flex;gap:0;flex:0 0 440px}
+.nl-input{flex:1;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.12);border-right:none;padding:13px 20px;font-family:var(--ff-sans);font-size:14px;color:#fff;outline:none}
+.nl-input::placeholder{color:rgba(255,255,255,.3)}
+.nl-input:focus{border-color:rgba(255,255,255,.35)}
+.nl-btn{background:var(--blue);color:#fff;border:none;padding:13px 28px;font-family:var(--ff-sans);font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:background .25s;white-space:nowrap}
+.nl-btn:hover{background:var(--blue-mid)}
+
+/* FOOTER */
+footer{background:#060A13;padding:72px 52px 36px}
+.footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:60px;margin-bottom:56px;padding-bottom:56px;border-bottom:1px solid rgba(255,255,255,.06)}
+.f-brand{display:flex;align-items:center;text-decoration:none;margin-bottom:20px}
+.f-brand-box{background:var(--blue);color:#fff;font-family:var(--ff-sans);font-size:13px;font-weight:600;padding:8px 16px;letter-spacing:.5px}
+.f-brand-tag{font-family:var(--ff-sans);font-size:11px;color:rgba(255,255,255,.35);letter-spacing:2.5px;text-transform:uppercase;padding-left:14px}
+.f-about{font-size:13px;font-weight:300;color:rgba(255,255,255,.35);line-height:1.8;margin-bottom:24px;max-width:300px}
+.f-socials{display:flex;gap:10px}
+.f-social{width:36px;height:36px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);font-size:12px;font-weight:500;text-decoration:none;transition:all .25s}
+.f-social:hover{border-color:var(--blue);color:#fff;background:var(--blue)}
+.f-col h4{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:20px}
+.f-col ul{list-style:none}
+.f-col ul li{margin-bottom:10px}
+.f-col ul a{font-size:13px;font-weight:300;color:rgba(255,255,255,.45);text-decoration:none;transition:color .25s}
+.f-col ul a:hover{color:var(--white)}
+.f-contact-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:14px}
+.f-contact-item svg{width:13px;height:13px;stroke:var(--blue);fill:none;stroke-width:2;flex-shrink:0;margin-top:2px}
+.f-contact-item span{font-size:13px;font-weight:300;color:rgba(255,255,255,.4);line-height:1.6}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.f-copy{font-size:12px;color:rgba(255,255,255,.2);letter-spacing:.3px}
+.f-network{display:flex;align-items:center;gap:8px}
+.f-net-dot{width:5px;height:5px;border-radius:50%;background:var(--blue);animation:blink 2s infinite}
+.f-net-text{font-size:11px;color:rgba(255,255,255,.2);letter-spacing:1px}
+.f-links{display:flex;gap:24px}
+.f-links a{font-size:11px;color:rgba(255,255,255,.2);text-decoration:none;transition:color .25s}
+.f-links a:hover{color:rgba(255,255,255,.6)}
+
+/* REVEAL */
+.sr{opacity:0;transform:translateY(32px);transition:opacity .75s var(--ease-out),transform .75s var(--ease-out)}
+.sr.in{opacity:1;transform:translateY(0)}
+.sr-d1{transition-delay:.08s}.sr-d2{transition-delay:.16s}.sr-d3{transition-delay:.24s}.sr-d4{transition-delay:.32s}.sr-d5{transition-delay:.4s}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+  .hero-body{grid-template-columns:1fr}
+  .hero-panel{min-height:380px;display:none}
+  .hero-content{border-right:none}
+  #statement{grid-template-columns:1fr}.statement-side{display:none}
+  #about{grid-template-columns:1fr}.about-img-side{min-height:340px}
+  #network{grid-template-columns:1fr}.net-right{grid-template-columns:1fr 1fr}
+  .services-header{grid-template-columns:1fr}
+  .svc-row{grid-template-columns:56px 1fr 80px}.svc-desc{display:none}
+  #contact{grid-template-columns:1fr}.contact-l{border-right:none;border-bottom:1px solid var(--rule)}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .ins-grid{grid-template-columns:1fr 1fr}.ins-card:first-child{grid-row:auto;grid-column:auto}
+  .why-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:680px){
+  #nav{padding:16px 24px}#nav.scrolled{padding:12px 24px}.nav-menu{display:none}
+  .hero-content{padding:40px 24px}.hero-numbers{flex-direction:column;gap:24px}
+  .hero-number{border-right:none;margin-right:0;border-bottom:1px solid var(--rule);padding-bottom:24px}
+  .hero-sub-row{grid-template-columns:1fr}
+  #services,#industries,#insights,#why,footer{padding-left:24px;padding-right:24px}
+  .services-header{padding:0 24px 40px}.svc-row{padding:0 24px}
+  .about-text-side,.contact-l,.contact-r,.net-left{padding:48px 24px}
+  .why-grid{grid-template-columns:1fr}.ind-top{grid-template-columns:1fr}
+  .ins-grid{grid-template-columns:1fr}#newsletter{flex-direction:column}.nl-form{width:100%;flex:none}
+  .footer-grid{grid-template-columns:1fr}.footer-bottom{flex-direction:column;align-items:flex-start}
+  .hero-top-bar-right{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="#">
+    <!--<div class="nav-logo-box">Moore</div>
+    <span class="nav-logo-tag">Mozambique</span>-->
+    <img src="https://mooremz.co.mz/wp-content/uploads/2025/03/logo-moore.png" width=90px" height="25">
+  </a>
+  <div class="nav-menu">
+    <a class="nav-item" href="#about">About</a>
+    <a class="nav-item" href="#services">Services</a>
+    <a class="nav-item" href="#network">Global Network</a>
+    <a class="nav-item" href="#insights">Publications</a>
+    <a class="nav-btn" href="#contact">Get in Touch</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-top-bar">
+    <div class="hero-top-bar-left"><div class="bar-dot"></div>Member of Moore Global Network</div>
+    <div class="hero-top-bar-right">
+      <span>Audit</span><span>Tax</span><span>Advisory</span><span>Maputo, Mozambique</span>
+    </div>
+  </div>
+  <div class="hero-body">
+    <div class="hero-content">
+      <div>
+        <div class="hero-kicker">Audit · Tax · Advisory · Consulting</div>
+        <h1 class="hero-h1">Maximise<br>the <span class="line-blue">value</span><br><span class="line-ital">in your business.</span></h1>
+        <div class="hero-divider"></div>
+        <div class="hero-sub-row">
+          <p class="hero-sub-text">At Moore, it's not about us — it's all about you. Working together delivers efficiencies that drive real, lasting results for your business in Mozambique and beyond.</p>
+          <div class="hero-sub-actions">
+            <a class="btn-solid" href="#services">Explore Our Services</a>
+            <a class="btn-border" href="#about">Our Story</a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-content-bottom">
+        <div class="hero-numbers">
+          <div class="hero-number"><span class="hn-val">558</span><span class="hn-label">Global member firms</span></div>
+          <div class="hero-number"><span class="hn-val">114</span><span class="hn-label">Countries represented</span></div>
+          <div class="hero-number"><span class="hn-val">Top 10</span><span class="hn-label">Global accounting network</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <div class="hero-panel-img">
+        <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=900&q=85&auto=format&fit=crop" alt="Maputo" id="hero-img">
+      </div>
+      <div class="hero-panel-footer">
+        <div class="hero-pf-tag">Est. 1907 · London</div>
+        <div class="hero-pf-text">We listen to you today.<br>We think for tomorrow.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <div class="t-item">Audit &amp; Assurance <span class="t-sep"></span></div>
+    <div class="t-item">Tax Advisory <span class="t-sep"></span></div>
+    <div class="t-item">Specialist Advisory <span class="t-sep"></span></div>
+    <div class="t-item">Business Support &amp; Outsourcing <span class="t-sep"></span></div>
+    <div class="t-item">Financial Advisory <span class="t-sep"></span></div>
+    <div class="t-item">Risk &amp; Compliance <span class="t-sep"></span></div>
+    <div class="t-item">Moore Global Network <span class="t-sep"></span></div>
+    <div class="t-item">558 Firms · 114 Countries <span class="t-sep"></span></div>
+    <div class="t-item">Audit &amp; Assurance <span class="t-sep"></span></div>
+    <div class="t-item">Tax Advisory <span class="t-sep"></span></div>
+    <div class="t-item">Specialist Advisory <span class="t-sep"></span></div>
+    <div class="t-item">Business Support &amp; Outsourcing <span class="t-sep"></span></div>
+    <div class="t-item">Financial Advisory <span class="t-sep"></span></div>
+    <div class="t-item">Risk &amp; Compliance <span class="t-sep"></span></div>
+    <div class="t-item">Moore Global Network <span class="t-sep"></span></div>
+    <div class="t-item">558 Firms · 114 Countries <span class="t-sep"></span></div>
+  </div>
+</div>
+
+<!-- STATEMENT -->
+<section id="statement">
+  <div class="statement-side sr"><span class="statement-side-label">Our Philosophy</span></div>
+  <div>
+    <p class="statement-body sr"><strong>Working together delivers efficiencies.</strong><br>Moore Mozambique is an audit, accounting and consulting firm <em>distinguished by innovation, quality, and a commitment to the future</em> — aligned with the Moore Global network, bringing world-class expertise to every engagement.</p>
+    <div class="statement-foot sr sr-d2">
+      <div class="statement-chips">
+        <span class="chip">Audit</span><span class="chip">Tax</span><span class="chip">Advisory</span><span class="chip">Outsourcing</span><span class="chip">Consulting</span>
+      </div>
+      <div class="statement-moore-tag"><div class="moore-bar"></div>Moore Global · Est. 1907</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header">
+    <div>
+      <div class="sec-eyebrow sr">What We Do</div>
+      <h2 class="sec-title sr sr-d1">Our <span>Services</span></h2>
+    </div>
+    <a class="services-link-all sr sr-d2" href="#">All Services</a>
+  </div>
+  <div class="svc-row sr"><span class="svc-n">01</span><span class="svc-name">Audit &amp; Assurance</span><p class="svc-desc">Independent, rigorous assurance services that build stakeholder confidence and meet the highest standards of regulatory compliance in Mozambique and internationally.</p><span class="svc-arrow">→</span></div>
+  <div class="svc-row sr sr-d1"><span class="svc-n">02</span><span class="svc-name">Tax Advisory</span><p class="svc-desc">We listen to you today, think for tomorrow. Our tax professionals deliver compliant, commercially-driven solutions across all disciplines — from corporate tax to transfer pricing.</p><span class="svc-arrow">→</span></div>
+  <div class="svc-row sr sr-d2"><span class="svc-n">03</span><span class="svc-name">Specialist Advisory</span><p class="svc-desc">Qualified advisors supporting solutions that generate real added value — from transaction advisory to performance improvement, restructuring and beyond.</p><span class="svc-arrow">→</span></div>
+  <div class="svc-row sr sr-d3"><span class="svc-n">04</span><span class="svc-name">Business Support &amp; Outsourcing</span><p class="svc-desc">Running a business today is challenging. We take on the complexity so you can focus on growth — payroll, accounting, compliance and more.</p><span class="svc-arrow">→</span></div>
+  <div class="svc-row sr sr-d4"><span class="svc-n">05</span><span class="svc-name">Financial Advisory</span><p class="svc-desc">Strategic financial guidance for corporates, investors and public sector entities navigating Mozambique's dynamic and evolving market landscape.</p><span class="svc-arrow">→</span></div>
+  <div class="svc-row sr sr-d5"><span class="svc-n">06</span><span class="svc-name">Risk &amp; Compliance</span><p class="svc-desc">Anticipate, manage and respond to risk — protecting your organisation's reputation, operations and long-term enterprise value.</p><span class="svc-arrow">→</span></div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-img-side sr">
+    <img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=900&q=80&auto=format&fit=crop" alt="Professional team">
+    <div class="about-img-overlay"></div>
+    <div class="about-img-caption">
+      <div class="about-img-num">1907</div>
+      <div class="about-img-label">Founded in London</div>
+    </div>
+  </div>
+  <div class="about-text-side">
+    <div class="about-tag sr"><svg width="8" height="8" viewBox="0 0 8 8" fill="currentColor"><circle cx="4" cy="4" r="4"/></svg>Who We Are</div>
+    <h2 class="about-h sr sr-d1">At Moore, it's not about us — it's all <em>about you.</em></h2>
+    <p class="about-p sr sr-d2">Moore Mozambique is aligned with the Moore Global network — a leading international accounting and consulting group with a presence in 114 countries. Our aim is not only to meet international standards but to exceed them.</p>
+    <p class="about-p sr sr-d2">We are distinguished by our innovation, quality, and genuine commitment to the future of every client we serve. Our people bring deep local knowledge and global reach to every mandate.</p>
+    <div class="about-rule sr sr-d3"></div>
+    <div class="about-facts sr sr-d4">
+      <div class="about-fact"><div class="af-val">558</div><div class="af-label">Global member firms</div></div>
+      <div class="about-fact"><div class="af-val">114</div><div class="af-label">Countries worldwide</div></div>
+      <div class="about-fact"><div class="af-val">40k+</div><div class="af-label">Professionals globally</div></div>
+      <div class="about-fact"><div class="af-val">Top 10</div><div class="af-label">Global network ranking</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- NETWORK -->
+<section id="network">
+  <div class="net-ghost">Global</div>
+  <div class="net-left">
+    <div class="net-eyebrow sr">Moore Global Network</div>
+    <h2 class="net-h sr sr-d1">A truly <span>global</span> network.</h2>
+    <p class="net-p sr sr-d2">Founded in London in 1907, Moore is a leading international accounting and consulting group. As part of Moore Global, our clients in Mozambique benefit from seamless access to deep local expertise combined with the capabilities and reach of an international organisation active in 114 countries.</p>
+    <a class="btn-white sr sr-d3" href="#">Explore the Network</a>
+  </div>
+  <div class="net-right">
+    <div class="nstat sr"><div class="nstat-n">558</div><div class="nstat-l">Member firms worldwide</div></div>
+    <div class="nstat sr sr-d1"><div class="nstat-n">114</div><div class="nstat-l">Countries represented</div></div>
+    <div class="nstat sr sr-d2"><div class="nstat-n">40k<sup>+</sup></div><div class="nstat-l">Professionals globally</div></div>
+    <div class="nstat sr sr-d3"><div class="nstat-n">Top<sup>10</sup></div><div class="nstat-l">Global accounting network</div></div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section id="industries">
+  <div class="ind-top">
+    <div>
+      <div class="sec-eyebrow sr">Sectors We Serve</div>
+      <h2 class="sec-title sr sr-d1">Industry <span>expertise</span></h2>
+    </div>
+    <p class="ind-sub sr sr-d2">Our multidisciplinary teams bring deep expertise across the sectors that define Mozambique's economy — from natural resources to financial services and beyond.</p>
+  </div>
+  <div class="ind-pills sr sr-d2">
+    <div class="ind-pill"><div class="ind-pill-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>Energy &amp; Resources</div>
+    <div class="ind-pill"><div class="ind-pill-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-4 0v2"/></svg></div>Financial Services</div>
+    <div class="ind-pill"><div class="ind-pill-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div>Real Estate</div>
+    <div class="ind-pill"><div class="ind-pill-icon"><svg viewBox="0 0 24 24"><path d="M4 22V12M8 22V4M12 22V8M16 22V2M20 22v-8"/></svg></div>Public Sector</div>
+    <div class="ind-pill"><div class="ind-pill-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>NGOs &amp; Development</div>
+    <div class="ind-pill"><div class="ind-pill-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>Technology</div>
+    <div class="ind-pill"><div class="ind-pill-icon"><svg viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/></svg></div>Hospitality &amp; Tourism</div>
+    <div class="ind-pill"><div class="ind-pill-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>Healthcare</div>
+    <div class="ind-pill"><div class="ind-pill-icon"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></div>Manufacturing</div>
+    <div class="ind-pill"><div class="ind-pill-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>Mining &amp; Extractives</div>
+  </div>
+</section>
+
+<!-- INSIGHTS -->
+<section id="insights">
+  <div class="ins-header">
+    <div>
+      <div class="sec-eyebrow sr">Insights &amp; Publications</div>
+      <h2 class="sec-title sr sr-d1">Latest <span>thinking</span></h2>
+    </div>
+    <a class="services-link-all sr sr-d2" href="#">All Publications</a>
+  </div>
+  <div class="ins-grid">
+    <div class="ins-card featured sr">
+      <img class="ins-img" src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=700&q=80&auto=format&fit=crop" alt="Tax">
+      <div class="ins-body">
+        <span class="ins-cat">Tax Advisory</span>
+        <h3 class="ins-title">Mozambique Tax Outlook 2025: Key Legislative Changes Every Business Must Understand</h3>
+        <div class="ins-meta"><span>Moore Mozambique</span><span class="ins-meta-dot"></span><span>March 2025</span><span class="ins-meta-dot"></span><span>8 min read</span></div>
+      </div>
+    </div>
+    <div class="ins-card sr sr-d1">
+      <img class="ins-img" src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=600&q=80&auto=format&fit=crop" alt="LNG">
+      <div class="ins-body">
+        <span class="ins-cat">Energy Sector</span>
+        <h3 class="ins-title">LNG Development: Accounting &amp; Reporting Implications for Mozambique</h3>
+        <div class="ins-meta"><span>February 2025</span><span class="ins-meta-dot"></span><span>5 min read</span></div>
+      </div>
+    </div>
+    <div class="ins-card sr sr-d2">
+      <img class="ins-img" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80&auto=format&fit=crop" alt="ESG">
+      <div class="ins-body">
+        <span class="ins-cat">Advisory</span>
+        <h3 class="ins-title">ESG Reporting in Southern Africa: A Practical Guide for Finance Leaders</h3>
+        <div class="ins-meta"><span>January 2025</span><span class="ins-meta-dot"></span><span>6 min read</span></div>
+      </div>
+    </div>
+    <div class="ins-card sr sr-d1">
+      <img class="ins-img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80&auto=format&fit=crop" alt="Audit">
+      <div class="ins-body">
+        <span class="ins-cat">Audit</span>
+        <h3 class="ins-title">The Future of Statutory Audit in Mozambique: What to Expect in 2025</h3>
+        <div class="ins-meta"><span>December 2024</span><span class="ins-meta-dot"></span><span>4 min read</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <div class="why-header">
+    <h2 class="why-h sr">Why choose <em>Moore?</em></h2>
+    <p class="why-sub sr sr-d1">We don't just advise — we partner. Our commitment is to deliver measurable outcomes that advance your strategic objectives, backed by the full weight of a global network.</p>
+  </div>
+  <div class="why-grid">
+    <div class="why-cell sr"><span class="why-num">01</span><div class="why-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="why-cell-h">Deep Local Expertise</div><p class="why-cell-p">Specialists who understand Mozambique's regulatory landscape, market dynamics, and unique business culture.</p></div>
+    <div class="why-cell sr sr-d1"><span class="why-num">02</span><div class="why-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div><div class="why-cell-h">Global Standards</div><p class="why-cell-p">International methodologies and quality frameworks that meet the highest global benchmarks — every engagement, every time.</p></div>
+    <div class="why-cell sr sr-d2"><span class="why-num">03</span><div class="why-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div class="why-cell-h">Partner-Led Delivery</div><p class="why-cell-p">Senior professionals actively engaged in your work — not delegated entirely to junior teams. Your matter matters.</p></div>
+    <div class="why-cell sr sr-d1"><span class="why-num">04</span><div class="why-icon"><svg viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><div class="why-cell-h">Forward-Thinking</div><p class="why-cell-p">We anticipate change, not just respond to it. Technology, innovation and forward planning are central to everything we do.</p></div>
+    <div class="why-cell sr sr-d2"><span class="why-num">05</span><div class="why-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="why-cell-h">Sector Depth</div><p class="why-cell-p">Specialisation across key sectors including energy, extractives, financial services, public sector and development organisations.</p></div>
+    <div class="why-cell sr sr-d3"><span class="why-num">06</span><div class="why-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div><div class="why-cell-h">Client-First Culture</div><p class="why-cell-p">Our success is measured by yours. Every decision we make puts your interests at the centre — always.</p></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-l">
+    <div class="contact-eyebrow sr">Get In Touch</div>
+    <h2 class="contact-h sr sr-d1">Let's work <em>together.</em></h2>
+    <p class="contact-sub sr sr-d2">Whether you're an established corporation, a growing business or an international investor entering Mozambique — we'd like to hear from you.</p>
+    <div class="contact-details sr sr-d3">
+      <div class="cd-item"><div class="cd-icon"><svg viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div><span>Av. 25 de Setembro, 1230, C.P.: 4200<br>Maputo, Mozambique</span></div>
+      <div class="cd-item"><div class="cd-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l1.06-1.06a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div><span>+258 21 300 720</span></div>
+      <div class="cd-item"><div class="cd-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><span>info@mooremz.co.mz</span></div>
+    </div>
+  </div>
+  <div class="contact-r sr">
+    <h3 class="form-h">Send us a message</h3>
+    <div class="f-row">
+      <div class="f-field"><label class="f-label">First Name</label><input class="f-input" type="text" placeholder="João"></div>
+      <div class="f-field"><label class="f-label">Last Name</label><input class="f-input" type="text" placeholder="Silva"></div>
+    </div>
+    <div class="f-field"><label class="f-label">Email Address</label><input class="f-input" type="email" placeholder="joao@company.com"></div>
+    <div class="f-field"><label class="f-label">Company</label><input class="f-input" type="text" placeholder="Your Company"></div>
+    <div class="f-field">
+      <label class="f-label">Service of Interest</label>
+      <select class="f-input"><option value="" disabled selected>Select a service</option><option>Audit &amp; Assurance</option><option>Tax Advisory</option><option>Specialist Advisory</option><option>Business Support &amp; Outsourcing</option><option>Financial Advisory</option><option>Risk &amp; Compliance</option></select>
+    </div>
+    <div class="f-field"><label class="f-label">Message</label><textarea class="f-input" rows="4" placeholder="Tell us about your needs..." style="resize:vertical"></textarea></div>
+    <button class="f-submit" id="submit-btn">Send Message →</button>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<div id="newsletter">
+  <div class="nl-text"><h3>Stay Informed</h3><p>Tax alerts, regulatory updates and sector insights — delivered to your inbox.</p></div>
+  <div class="nl-form"><input class="nl-input" type="email" placeholder="Your email address"><button class="nl-btn" id="nl-btn">Subscribe</button></div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <a class="f-brand" href="#"><div class="f-brand-box">Moore</div><span class="f-brand-tag">Mozambique</span></a>
+      <p class="f-about">An independent member of Moore Global, one of the world's leading accounting and consulting networks, present in 114 countries. Bringing international standards to every engagement in Mozambique.</p>
+      <div class="f-socials">
+        <a class="f-social" href="https://www.facebook.com/moore.mozambique">f</a>
+        <a class="f-social" href="https://www.linkedin.com/company/2722844">in</a>
+        <a class="f-social" href="https://x.com/MooreMozambique">𝕏</a>
+      </div>
+    </div>
+    <div class="f-col"><h4>Services</h4><ul><li><a href="#">Audit &amp; Assurance</a></li><li><a href="#">Tax Advisory</a></li><li><a href="#">Specialist Advisory</a></li><li><a href="#">Business Support</a></li><li><a href="#">Financial Advisory</a></li><li><a href="#">Risk &amp; Compliance</a></li></ul></div>
+    <div class="f-col"><h4>Company</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Our People</a></li><li><a href="#">Moore Global</a></li><li><a href="#">Publications</a></li><li><a href="#">Careers</a></li><li><a href="#">Contact</a></li></ul></div>
+    <div class="f-col"><h4>Contact</h4>
+      <div class="f-contact-item"><svg viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg><span>Av. 25 de Setembro, 1230<br>C.P.: 4200, Maputo</span></div>
+      <div class="f-contact-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l1.06-1.06a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg><span>+258 21 300 720</span></div>
+      <div class="f-contact-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span>info@mooremz.co.mz</span></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="f-copy">© 2025 Moore Mozambique. All rights reserved. Independent member of Moore Global Network.</span>
+    <div class="f-network"><div class="f-net-dot"></div><span class="f-net-text">Moore Global · 114 Countries</span></div>
+    <div class="f-links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">Cookies</a></div>
+  </div>
+</footer>
+
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>50),{passive:true});
+const hi=document.getElementById('hero-img');
+if(hi){hi.onload=()=>hi.classList.add('loaded');if(hi.complete)hi.classList.add('loaded')}
+const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:0.1});
+document.querySelectorAll('.sr').forEach(el=>io.observe(el));
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}}));
+document.getElementById('submit-btn').addEventListener('click',function(){this.textContent='Message Sent ✓';this.style.background='var(--blue-deep)';setTimeout(()=>{this.textContent='Send Message →';this.style.background=''},3000)});
+document.getElementById('nl-btn').addEventListener('click',function(){this.textContent='Subscribed ✓';setTimeout(()=>{this.textContent='Subscribe'},3000)});
+</script>
+</body>
+</html>
